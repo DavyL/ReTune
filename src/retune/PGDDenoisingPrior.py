@@ -24,7 +24,7 @@ def reshape_to_plot(img):
     C, H, W = img.shape
     return torch.einsum('bxy->xyb',img).cpu().detach().numpy()
 
-# %%
+
 class PGD_Drunet(PGD):
     def __init__(self,sigma_denoise_init = -5.0, *args, **kwargs):
         super(PGD_Drunet,self).__init__(*args, **kwargs)
@@ -103,10 +103,6 @@ def remove_params_from_model(model):
 # --------------------------------------------
 #
 if __name__ == "__main__":
-    savefigs_dir = 'figs/testL12'
-    if not os.path.exists(savefigs_dir):
-        os.makedirs(savefigs_dir)
-    savefigs_dir += '/'
     BASE_DIR = Path(".")
     print(BASE_DIR)
     DATA_DIR = BASE_DIR / "measurements"
@@ -180,7 +176,7 @@ if __name__ == "__main__":
     # %%
     Drunet_prior = dinv.optim.prior.PnP(denoiser=dinv.models.DRUNet(pretrained="download", device=device))
     with torch.no_grad():    
-        model_PnP = PGD_Drunet(data_fid, Drunet_prior, lin_op, stepsize_init, lambda_init, L_steps, R_restarts, device)
+        model_PnP = PGD_Drunet(-5.0, data_fid, Drunet_prior, lin_op, stepsize_init, lambda_init, L_steps, R_restarts, device=device)
         x_outputs_PnP, u_outputs_PnP, crit_PnP = model_PnP(x_init, obs, u_init, physics, ret_crit = True)
 
     fig, axs = plt.subplots(1,3, figsize=[15,5])
@@ -230,7 +226,7 @@ if __name__ == "__main__":
 
     GSDrunet_prior = GSPnP(denoiser=dinv.models.GSDRUNet(pretrained="download", device=device))
     with torch.no_grad():    
-        model_GSDrunet = PGD_Drunet(data_fid, GSDrunet_prior, lin_op, stepsize_init, lambda_init, L_steps, R_restarts, device)
+        model_GSDrunet = PGD_Drunet(-5.0, data_fid, GSDrunet_prior, lin_op, stepsize_init, lambda_init, L_steps, R_restarts, device)
         x_outputs_GSDrunet, u_outputs_GSDrunet, crit_GSDrunet = model_GSDrunet(x_init, obs, u_init, physics, ret_crit = True)
 
 # %%
