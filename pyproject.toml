@@ -25,6 +25,9 @@ dependencies = [
   "deepinv>=0.3.0",
   "wandb",
   "h5py",
+  "matplotlib",
+  "pywavelets>=1.7"
+  "pytorch-wavelets @ git+https://github.com/fbcotter/pytorch_wavelets.git"
 ]
 
 [project.urls]
