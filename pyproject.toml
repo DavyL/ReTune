@@ -21,13 +21,10 @@ classifiers = [
   "Typing :: Typed"
 ]
 dependencies = [
-  "numpy>=2.0",
+  "numpy",
   "deepinv>=0.3.0",
   "wandb",
   "h5py",
-  "pyafbf>=0.2.9",
-  "scikit-learn",
-  "imageio"
 ]
 
 [project.urls]
