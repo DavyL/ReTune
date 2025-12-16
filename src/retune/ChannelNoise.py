@@ -14,7 +14,8 @@ class ChannelNoiseModel(dinv.physics.noise.NoiseModel):
     
     def update_parameters(self, sigmas=None, **kwargs):
         if sigmas is not None:
-            self.sigmas = dinv.physics.noise.to_nn_parameter(sigmas)
+            #self.sigmas = dinv.physics.noise.to_nn_parameter(sigmas)
+            self.sigmas = torch.nn.ParameterList(sigmas)
 
     def fix_params(self):
         self.gaussian_noises = [dinv.physics.GaussianNoise(self.sigmas[c]) for c in range(3)]

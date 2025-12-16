@@ -26,7 +26,7 @@ dependencies = [
   "wandb",
   "h5py",
   "matplotlib",
-  "pywavelets>=1.7"
+  "pywavelets>=1.7",
   "pytorch-wavelets @ git+https://github.com/fbcotter/pytorch_wavelets.git"
 ]
 
